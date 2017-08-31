@@ -2,10 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import reduxThunk from 'redux-thunk'
 
 import CitiesIndex from './components/cities_index'
+import Signup from './components/auth/signup'
+import UserShow from './components/user_show'
 import Header from './components/header'
 import reducers from './reducers'
 
@@ -16,7 +18,11 @@ ReactDOM.render(
     <BrowserRouter>
       <div>
         <Header />
-        <Route path='/' component={CitiesIndex} />
+        <Switch>
+          <Route path='/signup' component={Signup} />
+          <Route path='/users/:id' component={UserShow} />
+          <Route path='/' component={CitiesIndex} />
+        </Switch>
       </div>
     </BrowserRouter>
   </Provider>

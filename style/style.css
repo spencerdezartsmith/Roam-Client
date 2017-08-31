@@ -10,3 +10,7 @@
     height: 450px;
   }
 }
+
+.container.form {
+  margin-top: 50px;
+}

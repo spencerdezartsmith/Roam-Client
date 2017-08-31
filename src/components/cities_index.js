@@ -23,7 +23,6 @@ class CitiesIndex extends Component {
   render() {
     return (
       <div>
-        <h1></h1>
         <Carousel slidesToShow={1} initialSlideHeight={70} framePadding='10px'>
           {this.renderCities()}
         </Carousel>
