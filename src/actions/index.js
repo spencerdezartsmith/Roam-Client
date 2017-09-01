@@ -1,5 +1,4 @@
 import axios from 'axios'
-// import history from './history'
 
 import {
   FETCH_CITIES,
@@ -33,9 +32,10 @@ export function signupUser(values, history) {
   }
 }
 
-export function fetchPostsForUser(id) {
+export function fetchUserPosts(id) {
+  const auth = localStorage.getItem('token')
   return function(dispatch) {
-    axios.get(`${ROOT_URL}/users/${id}/posts`)
+    axios.get(`${ROOT_URL}/users/${id}/posts`, { headers: { auth } })
       .then(posts => {
         dispatch({ type: FETCH_USER_POSTS})
       })

@@ -11,6 +11,38 @@
   }
 }
 
-.container.form {
+.container {
   margin-top: 50px;
+}
+
+.profile-container {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-card {
+  width: 20em;
+  display: flex !important;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.profile-img {
+  margin: 20px;
+}
+
+.profile-post-preview {
+  height: 200px;
+}
+
+.icon-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.fa.fa-pencil, .fa.fa-trash {
+  font-size: 3em;
 }

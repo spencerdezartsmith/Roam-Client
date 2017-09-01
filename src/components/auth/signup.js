@@ -38,7 +38,7 @@ class Signup extends Component {
           />
           <Field
             label='Current City'
-            name='currentCity'
+            name='current_city'
             component={this.renderInput}
           />
           <Field
@@ -71,8 +71,8 @@ function validate(values) {
     errors.username = 'Please enter a username'
   }
 
-  if (!values.currentCity) {
-    errors.currentCity = 'Please enter your current city'
+  if (!values.current_city) {
+    errors.current_city = 'Please enter your current city'
   }
 
   if (!values.email) {

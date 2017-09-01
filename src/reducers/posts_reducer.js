@@ -4,7 +4,7 @@ import FETCH_USER_POSTS from '../actions/types'
 export default function(state = {}, action) {
   switch(action.type) {
     case FETCH_USER_POSTS:
-      return _.mapKeys(action.payload.data, 'id')
+      return { ...state, usersPosts: _.mapKeys(action.payload.data, 'id') }
     default:
       return state
   }
