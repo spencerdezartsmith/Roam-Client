@@ -13,8 +13,8 @@ class CitiesIndex extends Component {
   renderCities() {
     return _.map(this.props.cities, city => {
       return (
-        <Link to={`/cities/${city.id}`}>
-          <img className='city-image' src={city.city_image} key={city.id} />
+        <Link to={`/cities/${city.id}`} key={city.id}>
+          <img className='city-image' src={city.city_image} />
         </Link>
       )
     })

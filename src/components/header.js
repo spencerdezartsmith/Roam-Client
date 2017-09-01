@@ -1,24 +1,26 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import { logoutUser } from '../actions'
+import { connect } from 'react-redux'
 
 class Header extends Component {
   renderLinks() {
-    if (this.props.authenticated) {
+    if (this.props.authenticated && this.props.user) {
       return [
         <li className='nav-item' key={'profile'}>
-          <Link to={`/users/${this.props.userId}`} className='nav-link'>Profile</Link>
+          <NavLink to={`/users/${this.props.user.id}`} className='nav-link'>Profile</NavLink>
         </li>,
         <li className='nav-item' key={'logout'}>
-          <Link to='/logout' className='nav-link'>Logout</Link>
+          <NavLink to='/logout' className='nav-link'>Logout</NavLink>
         </li>
       ]
     } else {
       return [
         <li className='nav-item' key={'signup'}>
-          <Link to='/signup' className='nav-link'>Sign up</Link>
+          <NavLink to='/signup' className='nav-link'>Sign up</NavLink>
         </li>,
         <li className='nav-item' key={'login'}>
-          <Link to='/login' className='nav-link'>Login</Link>
+          <NavLink to='/login' className='nav-link'>Login</NavLink>
         </li>
       ]
     }
@@ -27,7 +29,7 @@ class Header extends Component {
   render() {
     return (
       <nav className='navbar navbar-light bg-faded'>
-        <Link to='/' className='navbar-brand'>Roam</Link>
+        <NavLink to='/' className='navbar-brand'>Roam</NavLink>
         <ul className='nav navbar-nav'>
           {this.renderLinks()}
         </ul>
@@ -36,4 +38,11 @@ class Header extends Component {
   }
 }
 
-export default Header
+function mapStateToProps(state) {
+  return {
+    authenticated: state.auth,
+    user: state.users.currentUser
+  }
+}
+
+export default connect(mapStateToProps)(Header)

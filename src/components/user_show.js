@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchUserPosts } from '../actions'
@@ -10,19 +11,36 @@ class UserShow extends Component {
     this.props.fetchUserPosts(userId)
   }
 
+  renderPosts() {
+    return _.map(this.props.posts, post => {
+      return (
+        <Card
+          content={post.content}
+          key={post.id}
+          cityId={post.city_id}
+          postId={post.id}
+        />
+      )
+    })
+  }
+
   render() {
+    if (!this.props.user) {
+      return <div>Loading...</div>
+    }
+
     return (
       <div className='container user-show'>
         <div className='row'>
           <div className='col-md-4 profile-container'>
             <div className='card profile-card'>
               <img className="card-img-top profile-img"
-                src="http://s-ak.buzzfed.com/static/enhanced/web03/2010/4/6/16/enhanced-buzz-11539-1270587474-31.jpg"
+                src={this.props.user.profile_photo}
                 alt="Card image cap" />
               <ul className='list-group list-group-flush'>
-                <li className='list-group-item'>Name</li>
-                <li className='list-group-item'>Date Joined</li>
-                <li className='list-group-item'>Current City</li>
+                <li className='list-group-item'>{this.props.user.username}</li>
+                <li className='list-group-item'>{this.props.user.join_date}</li>
+                <li className='list-group-item'>{this.props.user.current_city}</li>
               </ul>
               <div className='card-block'>
                 <button type='submit' className='btn btn-primary'>Edit Profile</button>
@@ -30,7 +48,7 @@ class UserShow extends Component {
             </div>
           </div>
           <div className='col-md-8'>
-            <Card />
+            {this.renderPosts()}
           </div>
         </div>
       </div>
@@ -40,8 +58,8 @@ class UserShow extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    user: state.users[ownProps.match.params.id],
-    posts: state.posts.userPosts
+    user: state.users.currentUser,
+    posts: state.posts
   }
 }
 
